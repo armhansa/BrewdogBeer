@@ -14,8 +14,10 @@ enum APIError: Error {
 }
 
 class APIManager {
-  func getBeers<T: Codable>(urlString: String, completion: @escaping (Result<[T], APIError>) -> Void) {
-    guard let url = URL(string: urlString) else {
+  private let beerUrl: String = "https://api.punkapi.com/v2/beers?page="
+
+  func getBeersAtPage<T: Codable>(_ page: Int, completion: @escaping (Result<[T], APIError>) -> Void) {
+    guard let url = URL(string: "\(beerUrl)\(page)") else {
       return
     }
     var request = URLRequest(url: url)
