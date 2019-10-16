@@ -28,7 +28,7 @@ class ListViewController: UIViewController {
   func getBeers() {
     loadingView.isHidden = false
     let apiManager = APIManager()
-    apiManager.getBeers(urlString: "https://api.punkapi.com/v2/beers?page=\(page)") { [weak self] (result: Result<[Beer], APIError>) in
+    apiManager.getBeersAtPage(page) { [weak self] (result: Result<[Beer], APIError>) in
       switch result {
       case .success(let beers):
         self?.beers.append(contentsOf: beers)
